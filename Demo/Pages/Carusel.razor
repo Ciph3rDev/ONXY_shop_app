@@ -1,0 +1,68 @@
+﻿@page "/card"
+<h3>NEWS</h3>
+@code {
+    List<CardData> cards = new List<CardData>
+    {
+        new CardData { ImageUrl = "images/bild1.jpg", Title = "ONXY Shop eröffnet", Description = "User neuer ONXY Shop wurde eröffnet in New York.", Location = "New York" },
+        new CardData { ImageUrl = "images/bild7.jpg", Title = "Neuer Armkette", Description = "Ab jetzt verfügbar unser neue Armkette.", Location = "New York" },
+        new CardData { ImageUrl = "images/bild6.jpg", Title = "Neue Schuhe", Description = "Ab jetzt verfügbar unser neue Schuhe.", Location = "New York" },
+        new CardData { ImageUrl = "images/bild3.jpg", Title = "ONXY Shop eröffnet in Japan", Description = "User neuer ONXY Shop wurde eröffnet in Japan.", Location = "Japan" },
+    };
+
+    string searchTerm = "";
+
+    List<CardData> FilteredCards
+    {
+        get
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return cards;
+            }
+            else
+            {
+                return cards.Where(card => card.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || card.Description.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+        }
+    }
+
+    class CardData
+    {
+        public string ImageUrl { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
+    }
+}
+<MudSelect @bind-Value="transition" Label="Filter" Class="ma-2">
+    <MudSelectItem Value="@Transition.Slide">Ältest</MudSelectItem>
+    <MudSelectItem Value="@Transition.Fade">Neuest</MudSelectItem>
+</MudSelect>
+<input @bind="searchTerm" placeholder="Search..." />
+
+@foreach (var card in FilteredCards)
+{
+    <MudCard>
+        <MudCardMedia Image="@card.ImageUrl" Height="200" />
+        <MudCardContent>
+            <MudText Typo="Typo.h5">@card.Title</MudText>
+            <MudText Typo="Typo.body2">@card.Description</MudText>
+            <MudText Typo="Typo.body2">Location: @card.Location</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
+        </MudCardActions>
+    </MudCard>
+
+
+}
+
+
+
+@code {
+    private bool arrows = true;
+    private bool bullets = true;
+    private bool enableSwipeGesture = true;
+    private bool autocycle = true;
+    private Transition transition = Transition.Slide;
+}

@@ -1,0 +1,67 @@
+﻿@page "/"
+
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+
+    body {
+        background-image: url('/images/bild6.jpeg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .image-grid {
+        height: 100vh; 
+        max-width: 100%;
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center; 
+        align-items: center; 
+    }
+
+
+        .image-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            margin-bottom: 20px;
+        }
+
+
+        .image-grid a {
+            width: 100%;
+        }
+
+    button.border-bottom {
+        border-bottom: 1px solid black;
+        margin-top: 20px;
+    }
+
+    h3 {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="image-grid">
+    <a href="/shop"><img src="/images/bild6.jpg" alt="Your Image 1"></a>
+    <a href="/shop"><img src="/images/bild4.jpg" alt="Bild 4"></a>
+    <a href="/shop"><img src="/images/bild3.jpg" alt="Your Image 3"></a>
+    <a href="/shop"><img src="/images/bild2.jpg" alt="Your Image 2"></a>
+    <a href="/shop"><img src="/images/bild8.jpg" alt="Your Image 1"></a>
+    <a href="/shop"><img src="/images/bild10.jpg" alt="Your Image 1"></a>
+    <a href="/shop"><img src="/images/bild11.jpg" alt="Your Image 1"></a>
+    <a href="/shop"><img src="/images/bild12.jpg" alt="Your Image 1"></a>
+</div>
+
+
+@code {
+    
+}

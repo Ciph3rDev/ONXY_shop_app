@@ -1,0 +1,154 @@
+﻿@page "/employees"
+@using Demo.Data
+@inject EmployeeService EmployeeService
+<h1>Employees</h1>
+<p style="color:red">@Error</p>
+@if (employees == null)
+{
+    
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudDataGrid Items="@employees" Filterable="false" SortMode="@SortMode.None" Groupable="false">
+        <Columns>
+            <PropertyColumn Property="x => x.FirstName" />
+            <PropertyColumn Property="x => x.LastName" />
+            <PropertyColumn Property="x => x.Position" />
+            <PropertyColumn Property="x => x.YearsEmployed" Title="Years Employed" />
+            <PropertyColumn Property="x => x.Salary" Format="C" />
+            <PropertyColumn Property="x => x.Salary * x.YearsEmployed" Title="Total Earned" Format="C" />
+          
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudRating Size="@Size.Small" SelectedValue="@context.Item.Rating" />
+                     <MudButton Size="@Size.Small" @onclick="@(()=>EditEmployee(context.Item))" Variant="@Variant.Filled" Color="@Color.Primary">Edit</MudButton>
+                         
+                     
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+   
+
+    <MudDialog @bind-IsVisible="ShowPopup" Options="dialogOptions">
+            <DialogContent>
+
+                        <h3 class="modal-title">Edit Employee</h3>
+          
+                
+                        <MudTextField Label="FirstName" HelperText=""
+                        @bind-Value="objEmployee.FirstName"  />
+                        <MudTextField Label="LastName" HelperText=""
+                        @bind-Value="objEmployee.LastName" />
+                        <MudTextField Label="Position" HelperText=""
+                        @bind-Value="objEmployee.Position" />
+
+                <MudNumericField Label="YearsEmployed" HelperText="" Min="0" Max="60"
+                        @bind-Value="objEmployee.YearsEmployed" InputType="InputType.Number" />
+
+                       <MudNumericField Label="Salary" HelperText=""  HideSpinButtons="true"
+                        @bind-Value="objEmployee.Salary" InputType="InputType.Number" />
+
+                <MudNumericField Label="Rating" HelperText="" Min="0" Max="5"
+                        @bind-Value="objEmployee.Rating" InputType="InputType.Number" />
+
+                     
+                        <br />
+                <MudButton Variant="Variant.Filled" @onclick="SaveEmployee" Color="Color.Primary"> Save</MudButton>
+
+                        
+                        @if (objEmployee.Id > 0)
+                        {
+                   
+                    <MudButton Variant="Variant.Filled" @onclick="DeleteEmployee" Color="Color.Error" Class="ma-3"> Delete</MudButton>
+                 
+                        }
+                   
+             </DialogContent>
+       </MudDialog>
+
+
+}
+
+
+
+<MudButton Size="@Size.Small" Variant="@Variant.Filled" @onclick="AddNewEmployee" Color="@Color.Primary">Add</MudButton>
+
+
+@code
+{
+    private DialogOptions dialogOptions = new() { MaxWidth = MaxWidth.Medium, CloseButton = true };
+    string Error = "";
+    List<Employee> employees = new List<Employee>();
+    Employee objEmployee = new Employee();
+    bool ShowPopup = false;
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await EmployeeService.GetEmployeeAsync();
+    }
+    void AddNewEmployee()
+    {
+        objEmployee = new Employee();
+        objEmployee.Id = 0;
+        ShowPopup = true;
+    }
+    void EditEmployee(Employee Employee)
+    {
+        objEmployee = Employee;
+
+        ShowPopup = true;
+    }
+    void ClosePopup()
+    {
+        ShowPopup = false;
+    }
+    async Task SaveEmployee()
+    {
+        ShowPopup = false;
+        Error = "";
+        try
+        {
+            if (objEmployee.Id == 0)
+            {
+                Employee objNewEmployee = new Employee();
+                objNewEmployee.LastName = objEmployee.LastName;
+                objNewEmployee.FirstName = objEmployee.FirstName;
+                objNewEmployee.Position = objEmployee.Position;
+                objNewEmployee.YearsEmployed = objEmployee.YearsEmployed;
+                objNewEmployee.Salary = objEmployee.Salary;
+                objNewEmployee.Rating = objEmployee.Rating;
+               
+                var NewEmployee =
+                await EmployeeService.CreateEmployeeAsync(objNewEmployee);
+                employees.Add(objNewEmployee);
+            }
+            else
+            {
+                await EmployeeService.UpdateEmployeeAsync(objEmployee);
+            }
+        }
+        catch (Exception ex)
+        {
+            Error = ex.Message;
+        }
+    }
+    async Task DeleteEmployee()
+    {
+        ShowPopup = false;
+        try
+        {
+            Error = "";
+            await EmployeeService.DeleteEmployeeAsync(objEmployee);
+            employees.Remove(objEmployee);
+        }
+        catch (Exception ex)
+        {
+            Error = ex.Message;
+        }
+    }
+}
+
+

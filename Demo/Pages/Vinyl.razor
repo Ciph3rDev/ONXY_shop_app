@@ -1,0 +1,204 @@
+﻿@page "/vinyl"
+<h3>Vinyl</h3>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            margin-bottom: 0; 
+        }
+
+        h3 {
+            margin: 0; 
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 2em;
+        }
+
+        .product {
+            margin: 1em;
+            border: 1px solid #ddd;
+            padding: 1em;
+            text-align: center;
+            background-color: white;
+            cursor: pointer;
+        }
+
+            .product img {
+                width: 100%;
+                max-height: 150px;
+                object-fit: cover;
+                margin-bottom: 1em;
+            }
+
+        #productDetails {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+            cursor: pointer; 
+        }
+
+        .details-content {
+            background-color: white;
+            padding: 2em;
+            max-width: 600px;
+            width: 80%;
+            text-align: center;
+        }
+
+        #closeBtn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .details-content {
+            pointer-events: auto; 
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="product" onclick="showProductDetails(1)">
+            <a href="/vinyl"><img src="/images/vinyl1.jpg" alt="Your Image 1"></a>
+            <p>The Forever Story by JID Vinyl</p>
+            <a href="/addtocart" class="button">ADD TO CART</a>
+        </div>
+
+        <div class="product" onclick="showProductDetails(2)">
+            <a href="/vinyl"><img src="/images/vinyl2.jpg" alt="Your Image 1"></a>
+            <p>All My Heroes Are Cornballs  by JPEGMAFIA Vinyl</p>
+            <a href="/addtocart" class="button">ADD TO CART</a>
+        </div>
+
+        <div class="product" onclick="showProductDetails(3)">
+            <a href="/vinyl"><img src="/images/vinyl3.jpg" alt="Your Image 1"></a>
+            <p>Pray for Paris by Westside Gunn Vinyl</p>
+            <a href="/addtocart" class="button">ADD TO CART</a>
+        </div>
+
+        <div class="product" onclick="showProductDetails(4)">
+            <a href="/vinyl"><img src="/images/vinyl4.jpg" alt="Your Image 1"></a>
+            <p>Some Rap Songs by Earl Sweatshirt Vinyl</p>
+            <a href="/addtocart" class="button">ADD TO CART</a>
+        </div>
+    </div>
+
+    <div id="productDetails" onclick="hideProductDetails()">
+        <div class="details-content" onclick="event.stopPropagation();">
+            <span id="closeBtn" onclick="hideProductDetails">&times;</span>
+            <h2>Product Details</h2>
+            <img id="productDetailsImage" src="" alt="Product">
+            <p id="productDetailsText">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </div>
+
+    <script>
+        function showProductDetails(productNumber) {
+            var productDetails = document.getElementById('productDetails');
+            var image = document.getElementById('productDetailsImage');
+            var productDetailsText = document.getElementById('productDetailsText');
+
+            image.src = '/images/vinyl' + productNumber + '.jpg';
+
+            image.addEventListener('click', function () {
+                if (image.style.width === '100%') {
+                    image.style.width = '50%'; 
+                } else {
+                    image.style.width = '100%'; 
+                }
+            });
+
+            var detailsText = getProductDetailsText(productNumber);
+            var price = getProductPrice(productNumber);
+
+            productDetailsText.innerText = detailsText + ' Preis: ' + price + ' CHF';
+
+            productDetails.style.display = 'flex';
+        }
+
+        function hideProductDetails() {
+            var productDetails = document.getElementById('productDetails');
+            productDetails.style.display = 'none';
+        }
+
+        function getProductDetailsText(productNumber) {
+            switch (productNumber) {
+                case 1:
+                    return 'The Forever Story by JID Vinyl: Rap Album: Echter Rap mit starken Texten und Beats.';
+                case 2:
+                    return 'All My Heroes Are Cornballs  by JPEGMAFIA Vinyl: Alternativer Rap Experiment 1: Kreative Vielfalt und innovative Klänge.';
+                case 3:
+                    return 'Pray for Paris by Westside Gunn Vinyl: Rap Luxus Album: Opulentes Werk mit hochkarätigen Features.';
+                case 4:
+                    return 'Some Rap Songs by Earl Sweatshirt Vinyl: Alternativer Rap Experiment 2: Experimentelles Album, Grenzen des Genres erkundend.';
+                default:
+                    return 'Details für Produkt ' + productNumber;
+            }
+        }
+
+        function getProductPrice(productNumber) {
+            switch (productNumber) {
+                case 1:
+                    return 69.99;
+                case 2:
+                    return 69.99;
+                case 3:
+                    return 69.99;
+                case 4:
+                    return 69.99;
+                default:
+                    return 0; 
+            }
+        }
+
+        function addToCart(productNumber) {
+            var cartItemsList = document.getElementById('cartItemsList');
+            var productDetailsText = getProductDetailsText(productNumber);
+            var price = getProductPrice(productNumber);
+
+            var listItem = document.createElement('li');
+            listItem.innerText = 'Product: ' + productDetailsText + ', Price: ' + price + ' CHF';
+
+            cartItemsList.appendChild(listItem);
+
+            document.getElementById('cartPage').style.display = 'block';
+        }
+
+        function checkout() {
+            alert('Checkout functionality will be implemented here.');
+        }
+    </script>
+</body>
+
+</html>
+@code {
+
+}

@@ -1,0 +1,60 @@
+﻿@page "/shop"
+<h3>SHOP</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .button {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            background-color: #888888;
+            color: #000000;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .button:hover {
+                background-color: #555555;
+            }
+    </style>
+    <title>Shop</title>
+</head>
+<body>
+
+    <div class="grid-container">
+        <a href="/skate" class="button">Skate</a>
+        <a href="/tshit" class="button">Clothes</a>
+        <a href="/accessoires" class="button">Accessoires</a>
+        <a href="/vinyl" class="button">Vinyl</a>
+    </div>
+
+</body>
+</html>
+
+@code {
+
+}

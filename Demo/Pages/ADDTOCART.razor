@@ -1,0 +1,186 @@
+﻿@page "/addtocart"
+<h3>ADDTOCART</h3>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online-Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .add-to-cart-btn {
+            background-color: #888;
+            color: black;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #cart {
+            margin-top: 20px;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>ONXY Shop</h3>
+
+    <div class="product">
+        <a href="/skate"><img src="/images/skate1.jpg" alt="Your Image 1"></a>
+        <h4>Cat Logo Deck</h4>
+        <p>Preis: 59.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 1', 59.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/skate"><img src="/images/skate2.jpg" alt="Your Image 1"></a>
+        <h4>Tyler Logo Deck</h4>
+        <p>Preis: 59.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 2', 59.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/skate"><img src="/images/skate3.jpg" alt="Your Image 1"></a>
+        <h4>Towelie Logo Deck</h4>
+        <p>Preis: 69.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 3', 69.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/skate"><img src="/images/skate4.jpg" alt="Your Image 1"></a>
+        <h4>Keanu Reeves Logo Deck</h4>
+        <p>Preis: 109.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 4', 109.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/accessoires"><img src="/images/accessoires1.jpg" alt="Your Image 1"></a>
+        <h4>YANKEE WITH NO BRIM</h4>
+        <p>Preis: 420.00</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 5', 420.00)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/accessoires"><img src="/images/accessoires2.jpg" alt="Your Image 1"></a>
+        <h4>Pictures of Employees ONXY</h4>
+        <p>Preis: 89.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 6', 89.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/accessoires"><img src="/images/accessoires3.jpg" alt="Your Image 1"></a>
+        <h4>FISH</h4>
+        <p>Preis: 89.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 7', 89.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/accessoires"><img src="/images/accessoires4.jpg" alt="Your Image 1"></a>
+        <h4>Pictures of Employees ONXY 2</h4>
+        <p>Preis: 89.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 8', 89.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/tshit"><img src="/images/tshit1.jpg" alt="Your Image 1"></a>
+        <h4>Quote T-Shirt</h4>
+        <p>Preis: 39.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 9', 39.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/tshit"><img src="/images/tshit2.jpg" alt="Your Image 1"></a>
+        <h4>Old Man T-Shirt</h4>
+        <p>Preis: 39.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 10', 39.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/tshit"><img src="/images/tshit3.jpg" alt="Your Image 1"></a>
+        <h4>BIG BIG CHUNGUS T-Shirt</h4>
+        <p>Preis: 99.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 11', 99.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/tshit"><img src="/images/tshit4.jpg" alt="Your Image 1"></a>
+        <h4>Towelie T-Shirt</h4>
+        <p>Preis: 39.99;</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 12', 39.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/vinyl"><img src="/images/vinyl1.jpg" alt="Your Image 1"></a>
+        <h4>The Forever Story by JID Vinyl</h4>
+        <p>Preis: 69.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 13', 69.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/vinyl"><img src="/images/vinyl2.jpg" alt="Your Image 1"></a>
+        <h4>All My Heroes Are Cornballs  by JPEGMAFIA Vinyl</h4>
+        <p>Preis: 69.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 14', 69.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/vinyl"><img src="/images/vinyl3.jpg" alt="Your Image 1"></a>
+        <h4>Pray for Paris by Westside Gunn Vinyl</h4>
+        <p>Preis: 69.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 15', 69.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div class="product">
+        <a href="/vinyl"><img src="/images/vinyl4.jpg" alt="Your Image 1"></a>
+        <h4>Some Rap Songs by Earl Sweatshirt Viny</h4>
+        <p>Preis: 69.99</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Produkt 15', 69.99)">In den Warenkorb legen</button>
+    </div>
+
+    <div id="cart">
+        <h3>Warenkorb</h3>
+        <ul id="cart-items"></ul>
+    </div>
+
+    <script>
+        function addToCart(productName, price) {
+            var cartItems = document.getElementById('cart-items');
+            var li = document.createElement('li');
+            li.appendChild(document.createTextNode(productName + ' - $' + price));
+            cartItems.appendChild(li);
+        }
+    </script>
+
+</body>
+</html>
+
+
+@code {
+
+}

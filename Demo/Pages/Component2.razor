@@ -1,0 +1,21 @@
+﻿@page "/home"
+<h3>Component2</h3>
+
+<MudSlider @bind-Value="spacing" Min="0" Max="10" Color="Color.Info" Class="mb-6">Spacing: @spacing.ToString()</MudSlider>
+
+<MudGrid Spacing="@spacing" Justify="Justify.Center">
+    <MudItem>
+        <MudImage Src="images/forbiddentruhs2_360x.jpg" style="width:100%; height: auto"/>
+    </MudItem>
+    <MudItem>
+        MudImage Src="images/forbiddentruhs_360x.jpg" style="width:100%; height: auto"/>
+    </MudItem>
+    <MudItem>
+        <MudPaper Height="140px" Width="140px" />
+    </MudItem>
+</MudGrid>
+
+
+@code {
+    public int spacing { get; set; } = 2;
+}
